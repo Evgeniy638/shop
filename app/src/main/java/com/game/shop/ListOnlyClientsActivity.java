@@ -17,8 +17,8 @@ import android.widget.TextView;
 public class ListOnlyClientsActivity extends AppCompatActivity {
     int countClients = 5;
     Client[] clients = new Client[countClients];
-    Handler[] handler;
-    TextView[] textViews;
+    Handler[] handler = new Handler[countClients];
+    TextView[] textViews = new TextView[countClients];
 
     LinearLayout viewListOnlyClients;
 
@@ -55,6 +55,7 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
                 }
             };
 
+            clients[i] = new Client(Integer.toString(i), handler[i]);
             clients[i].start(/* handler[i] */);
         }
     }

@@ -20,7 +20,7 @@ public class Validator {
     //product="id товара:колличество товара"
     public String takeGoods(String product){
         String[] a = product.split(":");
-        if(Shop.getQoanity(Integer.parseInt(a[1]))!=0){
+        if(Shop.getQoanity(Integer.parseInt(a[0]))!=0){
             //получаем количество взятого в магазине товара
             a[1]=String.valueOf(Shop.setQuanityTake( Integer.parseInt(a[0]),Integer.parseInt(a[1])));
             //сохраняем в историю
