@@ -1,16 +1,21 @@
 package com.game.shop;
 
+import android.os.Message;
+import android.view.textclassifier.ConversationActions;
+
+import android.os.Handler;
+
 public class Client extends Thread {
     Validator validator;
-    String name="";
+    String id="";
+    Handler handler;
+    Message msg;
 
-    Client(String name){
-        this.name=name;
-    }
-    @Override
-    public synchronized void start() {
-        super.start();
-        validator = new Validator("a");
+    Client(String id,Handler handler){
+        this.id=id;
+        this.handler=handler;
+        validator = new Validator(id);
+        msg=new Message();
     }
 
     @Override
@@ -34,17 +39,22 @@ public class Client extends Thread {
 
                     int randGoodQuanity= 1 + (int)(Math.random() * validator.getQuanity(randGoodId));//Колличество возвр. товара
                     String a= String.valueOf(randGoodId)+ String.valueOf(randGoodQuanity);
-                    validator.returnGoods(a);
+                    msg.what=validator.getTotalAmount();
+                    msg.obj=validator.returnGoods(a);
+                    handler.sendMessage(msg);
                 }
                 //логика возвращения рандомного товара
             }else {
                 int randGoodId=0+(int)(Math.random()*14);//Выбираем рандомный товар
                 int randGoodQuanity = 1+(int)(Math.random()*100);//колличество рандомного товара
                 String a= String.valueOf(randGoodId)+ String.valueOf(randGoodQuanity);
-                validator.takeGoods(a);
+                msg.what=validator.getTotalAmount();
+                msg.obj=validator.takeGoods(a);
+                handler.sendMessage(msg);
             }
-        }
 
-        Сashbox.calculate(validator);
+        }
+        msg.what=0;
+        handler.sendMessage(msg);
     }
 }

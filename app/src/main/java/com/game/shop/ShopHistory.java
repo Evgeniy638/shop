@@ -5,20 +5,16 @@ import java.util.Map;
 
 public class ShopHistory {
 
-    ShopHistory(){
 
-    }
-
-    static String[][] arrahHistory = new String[15][15];
-    static boolean[] array=new boolean[15];
+    static String[] arrahHistory = new String[3200];
+    static boolean[] array=new boolean[3200];
 
 
-    public void saveHistory(int id,String [] arrayFromValid){
+    public static void saveHistory(int id,String arrayFromValid){
         arrahHistory[id]=arrayFromValid;
         array[id]=true;
     }
     public static String[] getHistory(int id){
-        if(array[id] == true) return arrahHistory[id];
-        else return null;
+      return null;
     }
 }
