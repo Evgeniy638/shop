@@ -69,16 +69,10 @@ public class Validator {
         array[0]=n;//0-левой элемент массива-это колличество элементов
         n=0;
         for(int i=0;i<100;i++){
-<<<<<<< refs/remotes/origin/develop
-            if(shoperList[i]!=0)
-                array[n+1]=shoperList[i];
-            n++;
-=======
             if(shoperList[i]!=0) {
                 array[n+1]=i;
                 n++;
             }
->>>>>>> Logic94%
         }
         return array;
     }//возвращает массив id товаров,0левой элемент-колличество товаров
