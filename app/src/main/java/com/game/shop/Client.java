@@ -55,11 +55,11 @@ public class Client extends Thread {
                 msg.arg1=validator.getTotalAmount();
                 handler.sendMessage(msg);
             }
-
         }
         //Когда клиент закончил
         validator.saveHistory();
         msg.what=0;
+        msg.obj="";
         handler.sendMessage(msg);
     }
 }
