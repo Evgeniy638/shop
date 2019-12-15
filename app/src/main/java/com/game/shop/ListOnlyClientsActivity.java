@@ -50,10 +50,8 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
                 public void handleMessage(@NonNull Message msg) {
                     super.handleMessage(msg);
 
-                    if(msg.what == 1){
-
-                    }else {
-                        removeViewClients(textViews[finalI]);
+                    if(msg.what == 0){
+                        viewListOnlyClients.removeView(textViews[finalI]);
                     }
                 }
             };
@@ -74,9 +72,5 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-    }
-
-    private void removeViewClients(TextView textView){
-        textView.getParent();
     }
 }
