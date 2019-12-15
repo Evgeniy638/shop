@@ -11,8 +11,8 @@ public class Validator {
         ...
     */
     private String id;
-    private String[] arryOfShoper= new String[100];//хранилище операций
-    private int[] shoperList = new int[100];//колличество товара(с запасом) в списке покупок,номер элемента соответствует id товара
+    private String[] arryOfShoper= new String[1000];//хранилище операций
+    private int[] shoperList = new int[100];//колличество вариантов товара(с запасом) в списке покупок,номер элемента соответствует id товара
     private int totalAmount=0;
     private int currentParsher=0;//номер текущей покупки
 
