@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    tools:context=".Authorization">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="0dp"
+            android:paddingTop="30dp"
+            app:srcCompat="@drawable/lock" />
+
+        <TextView
+            android:id="@+id/Auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            android:textColor="#D82525"
+            android:text="Авторизация"
+            android:textSize="27dp" />
+
+        <EditText
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Login"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:padding="15dp"
+            android:background="@drawable/fields"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColor="#D82525" />
+
+        <EditText
+            android:id="@+id/Pas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:padding="15dp"
+            android:background="@drawable/fields"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColor="#D82525" />
+
+        <Button
+            android:id="@+id/enter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_enter"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:fontFamily="monospace"
+            android:textAllCaps="false"
+            android:textSize="26dp"
+            android:textColor="#cfcaca"
+            android:text="Войти" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

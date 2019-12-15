@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/back"
-    tools:context=".ListOnlyClientsActivity">
+    tools:context=".MoreAboutClientActivity">
 
 
     <LinearLayout
@@ -92,7 +92,7 @@
                     android:layout_marginLeft="7dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:textSize="27dp"
+                    android:textSize="28dp"
                     android:paddingTop="2dp"
                     android:paddingBottom="5dp"
                     android:background="@drawable/summa"
@@ -115,29 +115,18 @@
                 <Button
                     android:id="@+id/button5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="1"
-                    android:layout_marginRight="7dp"
-                    android:textSize="24dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:textSize="34dp"
                     android:paddingBottom="2dp"
-                    android:textAllCaps="false"
-                    android:textStyle="italic"
-                    android:background="@drawable/button_online"
-                    android:textColor="#CFCC1C"
-                    android:text="Онлайн" />
 
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="24dp"
-                    android:paddingBottom="2dp"
                     android:textAllCaps="false"
                     android:textStyle="italic"
-                    android:background="@drawable/button_viruchka"
-                    android:textColor="#DA3232"
-                    android:text="Выручка" />
+                    android:background="@drawable/button_back"
+                    android:textColor="#E9E407"
+                    android:text="Назад" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

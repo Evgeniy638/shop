@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/back"
-    tools:context=".ListOnlyClientsActivity">
+    tools:context=".ListPurchaseHistory">
 
 
     <LinearLayout
@@ -18,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="620dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/goods"
             android:orientation="vertical">
@@ -46,8 +46,6 @@
 
                 <TextView
                     android:id="@+id/prib1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     style="@style/ForOnline"
                     android:text="1. 1517₽" />
                 <TextView
@@ -61,21 +59,29 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/back"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="30dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="5dp"
-            android:textColor="#F51D1D"
-            android:textStyle="italic"
-            android:background="@drawable/goods"
-            android:text="Назад" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="19dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/online"
+                android:layout_width="155dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:textSize="34dp"
+                android:paddingBottom="2dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:textAllCaps="false"
+                android:textStyle="italic"
+                android:background="@drawable/button_online"
+                android:textColor="#CFCC1C"
+                android:text="Онлайн" />
+
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
