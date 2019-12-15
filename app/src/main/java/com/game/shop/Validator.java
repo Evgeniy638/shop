@@ -5,6 +5,7 @@ public class Validator {
         this.id = id +":";
         for(int i=0;i<100;i++)arryOfShoper[i]="";
         for(int i=0;i<100;i++)shoperList[i]=0;
+        answer[0]=this.id;
     }
     //список товаров
     /*
@@ -12,13 +13,15 @@ public class Validator {
     */
     private String id;
     private String[] arryOfShoper= new String[1000];//хранилище операций
+    private String[] answer=new String[100];
     private int[] shoperList = new int[100];//колличество вариантов товара(с запасом) в списке покупок,номер элемента соответствует id товара
     private int totalAmount=0;
     private int currentParsher=0;//номер текущей покупки
 
+
     //параметр будет товар
     //product="id товара:колличество товара"
-    public String takeGoods(String product){
+    public String[] takeGoods(String product){
         String[] a = product.split(":");
         if(Shop.getQoanity(Integer.parseInt(a[0]))!=0){
             //получаем количество взятого в магазине товара
@@ -31,12 +34,12 @@ public class Validator {
             //Общая стоимость повышается
             totalAmount+=Shop.getPrice(Integer.parseInt(a[0]))*Integer.parseInt(a[1]);
             currentParsher++;
-            return id +a[0]+":"+a[1];
+            return makeAnswer(a[0],a[1]);
         }
         else return null;//товар закончился
     }
     
-    public String returnGoods(String product){
+    public String[] returnGoods(String product){
         String[] a = product.split(":");
         if(shoperList[Integer.parseInt(a[0])]!=0) {//если в корзине есть такой товар
             if(shoperList[Integer.parseInt(a[0])]-Integer.parseInt(a[1])>=0) {//Если в коризине >=колличество,которое хотят вернуть
@@ -55,7 +58,7 @@ public class Validator {
                 totalAmount -= Shop.getPrice(Integer.parseInt(a[0])) * Integer.parseInt(a[1]);
                 currentParsher++;
             }
-            return id + a[0] + ":-" + a[1] ;
+            return makeAnswer(a[0],":-"+a[1]) ;
         }
         else return null;//корзина пуста
     }
@@ -97,4 +100,8 @@ public class Validator {
         ShopHistory.saveHistory(Integer.parseInt(id.substring(0,id.length()-1)),arr);//сохраняем чек
     }
 
+    public String[] makeAnswer(String ipProd,String amountProd){
+        answer[Integer.parseInt(ipProd)+1] = Shop.getName(Integer.parseInt(ipProd))+":"+amountProd+":"+Shop.getPrice(Integer.parseInt(ipProd));
+        return answer;
+    }
 }

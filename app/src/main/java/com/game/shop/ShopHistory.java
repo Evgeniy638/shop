@@ -14,6 +14,17 @@ public class ShopHistory {
         arrahHistory[id]=arrayFromValid;
         array[id]=true;
     }
+    public static int[] getOffline(){
+        int n=0;
+        for(int i=0;i<320;i++) if(array[i] == true)n++;
+        int[] arrInt = new int[n+1];
+        arrInt[0]=n;
+        for(int i=1;i<=n;i++) if(array[i]==true) {
+            arrInt[n + 1] = i;
+            n++;
+        }
+        return arrInt;
+    }
     public static String[] getHistory(int id){//Возвращает чек
         boolean j =false;
         String[] arr = new String[3200];
