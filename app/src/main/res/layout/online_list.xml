@@ -45,15 +45,6 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:id="@+id/list_only_clients">
-
-                <TextView
-                    android:id="@+id/pok"
-                    style="@style/ForOnline"
-                    android:text="Online" />
-                <TextView
-                    android:id="@+id/pok2"
-                    style="@style/ForOnline"
-                    android:text="Offline" />
             </LinearLayout>
             </ScrollView>
         </LinearLayout>

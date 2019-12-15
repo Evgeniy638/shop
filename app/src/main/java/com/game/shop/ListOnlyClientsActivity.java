@@ -16,12 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ListOnlyClientsActivity extends AppCompatActivity {
-    int countClients = 5;
+    static int countClients = 5;
     Client[] clients = new Client[countClients];
     Handler[] handler = new Handler[countClients];
     TextView[] textViews = new TextView[countClients];
 
     static int currentIdUser = -1;
+
+    static String[][] messages = new String[countClients][15];
+    static int[] totalAmounts = new int[countClients];
 
     LinearLayout viewListOnlyClients;
 
@@ -44,6 +47,8 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
         for (int i = 0; i < countClients; i++){
             textViews[i] = addViewClients(viewListOnlyClients.getContext());
 
+            textViews[i].setText("Клиент: " + i);
+
             final int finalI = i;
 
             handler[i] = new Handler(){
@@ -53,8 +58,14 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
 
                     if(msg.what == 0){
                         viewListOnlyClients.removeView(textViews[finalI]);
-                    }else if(((String [])msg.obj)[0].equals(currentIdUser + ":")){
-                        MoreAboutClientActivity.sendMessage((String[]) msg.obj);
+                    }else{
+                        int id = Integer.parseInt(((String [])msg.obj)[0].split(":")[0]);
+                        totalAmounts[id] = msg.arg1;
+                        messages[id] = (String [])msg.obj;
+
+                        if(id == currentIdUser){
+                            MoreAboutClientActivity.sendMessage();
+                        }
                     }
                 }
             };
