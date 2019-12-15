@@ -100,8 +100,13 @@ public class Validator {
         ShopHistory.saveHistory(Integer.parseInt(id.substring(0,id.length()-1)),arr);//сохраняем чек
     }
 
-    public String[] makeAnswer(String ipProd,String amountProd){
-        answer[Integer.parseInt(ipProd)+1] = Shop.getName(Integer.parseInt(ipProd))+":"+amountProd+":"+Shop.getPrice(Integer.parseInt(ipProd));
+    public String[] makeAnswer(String idProd,String amountProd){
+        if(answer[Integer.parseInt(idProd)+1].length()>2){
+            String[] a = answer[Integer.parseInt(idProd)+1].split(":");
+            a[1]=String.valueOf(Integer.parseInt(a[1]) + amountProd);
+            answer[Integer.parseInt(idProd)+1] = Shop.getName(Integer.parseInt(idProd))+":"+a[1]+":"+Shop.getPrice(Integer.parseInt(idProd));
+        }
+        else answer[Integer.parseInt(idProd)+1] = Shop.getName(Integer.parseInt(idProd))+":"+amountProd+":"+Shop.getPrice(Integer.parseInt(idProd));
         return answer;
     }
 }
