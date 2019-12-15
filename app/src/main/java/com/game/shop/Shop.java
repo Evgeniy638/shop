@@ -60,6 +60,6 @@ public  class Shop {
     }
     public static int getQoanity(int id){ //получить количество товара
         String[] a = arrayShop[id].split(":");
-        return Integer.parseInt(a[2]);
+        return Integer.parseInt(a[1]);
     }
 }

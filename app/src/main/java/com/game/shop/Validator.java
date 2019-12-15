@@ -26,7 +26,7 @@ public class Validator {
             //сохраняем в историю
             arryOfShoper[currentParsher] = id +a[0]+a[1];
 
-            shoperList[Integer.parseInt(a[0])] +=Integer.parseInt(a[0]);
+            shoperList[Integer.parseInt(a[0])] +=Integer.parseInt(a[1]);
 
             //Общая стоимость повышается
             totalAmount+=Shop.getPrice(Integer.parseInt(a[0]))*Integer.parseInt(a[1]);
@@ -69,7 +69,8 @@ public class Validator {
         array[0]=n;//0-левой элемент массива-это колличество элементов
         n=0;
         for(int i=0;i<100;i++){
-            if(shoperList[i]!=0) array[n+1]=shoperList[i];
+            if(shoperList[i]!=0)
+                array[n+1]=shoperList[i];
             n++;
         }
         return array;
