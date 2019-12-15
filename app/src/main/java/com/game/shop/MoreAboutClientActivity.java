@@ -31,6 +31,7 @@ public class MoreAboutClientActivity extends Activity {
             @Override
             public void onClick(View v) {
                 isDraw = false;
+                ListOnlyClientsActivity.currentIdUser = -1;
                 finish();
             }
         });
@@ -40,8 +41,6 @@ public class MoreAboutClientActivity extends Activity {
     }
 
     public static synchronized void sendMessage(String[] strings){
-        if (!strings[0].equals(id + ":")) return;
-
         data = strings;
 
         if(isDraw) drawList();

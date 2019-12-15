@@ -21,6 +21,8 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
     Handler[] handler = new Handler[countClients];
     TextView[] textViews = new TextView[countClients];
 
+    static int currentIdUser = -1;
+
     LinearLayout viewListOnlyClients;
 
     @SuppressLint("HandlerLeak")
@@ -51,7 +53,7 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
 
                     if(msg.what == 0){
                         viewListOnlyClients.removeView(textViews[finalI]);
-                    }else {
+                    }else if(((String [])msg.obj)[0].equals(currentIdUser + ":")){
                         MoreAboutClientActivity.sendMessage((String[]) msg.obj);
                     }
                 }
@@ -61,6 +63,7 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ListOnlyClientsActivity.this, MoreAboutClientActivity.class);
+                    currentIdUser = finalI;
                     intent.putExtra("id", Integer.toString(finalI));
                     startActivity(intent);
                 }
