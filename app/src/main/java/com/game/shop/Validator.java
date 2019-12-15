@@ -58,7 +58,7 @@ public class Validator {
                 totalAmount -= Shop.getPrice(Integer.parseInt(a[0])) * Integer.parseInt(a[1]);
                 currentParsher++;
             }
-            return makeAnswer(a[0],":-"+a[1]) ;
+            return makeAnswer(a[0],"-"+a[1]) ;
         }
         else return null;//корзина пуста
     }
