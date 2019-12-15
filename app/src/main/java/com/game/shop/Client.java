@@ -16,6 +16,7 @@ public class Client extends Thread {
         this.handler=handler;
         validator = new Validator(id);
         msg=new Message();
+        msg.what=1;
     }
 
     @Override
@@ -25,6 +26,7 @@ public class Client extends Thread {
         int countGoods = (int)(Math.random() * 20);
 
         for (int i = 0; i < countGoods; i++){
+
             try {
                 sleep((long)(Math.random() * 10000));
             } catch (InterruptedException e) {
@@ -32,14 +34,15 @@ public class Client extends Thread {
             }
 
             if(Math.random() < 0.3){
-                int[] IdList=validator.getIdList();//id всех товаров в списке
+                int[] IdList=validator.getIdList();//id всех товаров в списке клиента,0левой элемент-их колличество
                 if(IdList[0]!=0) {//Если список не пуст
+                    //выбираем рандомный товар из нашего списка
                     int randGoodId =1+ (int) (Math.random() * IdList[0]);
-                    randGoodId=IdList[randGoodId];//выбираем рандомный товар из нашего списка
+                    randGoodId=IdList[randGoodId];
 
                     int randGoodQuanity= 1 + (int)(Math.random() * validator.getQuanity(randGoodId));//Колличество возвр. товара
-                    String a= String.valueOf(randGoodId)+ String.valueOf(randGoodQuanity);
-                    msg.what=validator.getTotalAmount();
+                    String a= String.valueOf(randGoodId)+":"+ String.valueOf(randGoodQuanity);
+                    msg.arg1=validator.getTotalAmount();
                     msg.obj=validator.returnGoods(a);
                     handler.sendMessage(msg);
                 }
@@ -47,13 +50,14 @@ public class Client extends Thread {
             }else {
                 int randGoodId=0+(int)(Math.random()*14);//Выбираем рандомный товар
                 int randGoodQuanity = 1+(int)(Math.random()*100);//колличество рандомного товара
-                String a= String.valueOf(randGoodId)+ String.valueOf(randGoodQuanity);
-                msg.what=validator.getTotalAmount();
+                String a= String.valueOf(randGoodId)+":"+ String.valueOf(randGoodQuanity);
+                msg.arg1=validator.getTotalAmount();
                 msg.obj=validator.takeGoods(a);
                 handler.sendMessage(msg);
             }
 
         }
+        validator.saveHistory();
         msg.what=0;
         handler.sendMessage(msg);
     }

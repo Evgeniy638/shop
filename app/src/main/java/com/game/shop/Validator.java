@@ -61,7 +61,7 @@ public class Validator {
         else return null;//корзина пуста
     }
 
-    public int[] getIdList(){
+    public int[] getIdList(){//возвращает массив id товаров,0левой элемент-колличество товаров
         int n=0;
         for(int i=0;i<100;i++){
             if(shoperList[i]!=0) n++;
@@ -77,7 +77,7 @@ public class Validator {
     }
     public int getQuanity(int id){
         return shoperList[id];
-    }
+    }//колличество определённого товара
 
     public String[] getList(){
         return arryOfShoper;
@@ -85,4 +85,15 @@ public class Validator {
     public int getTotalAmount(){
         return totalAmount;
     }//текущая сумма покупки
+
+    public void saveHistory(){//Делаем чек вида [id][колличество покупок][строка][строка]
+        String[] arr= new String[this.getIdList()[0]+2];
+        arr[0]=id.substring(0,id.length()-1);//записываем id
+        arr[1]=String.valueOf(this.getIdList()[0]);//колличество строк с покупками в чеке
+        for(int i=2;i<this.getIdList()[0]+2;i++){
+            arr[i]=String.valueOf(this.getIdList()[i-1]) +":"+String.valueOf(this.getQuanity(this.getIdList()[i-1]));
+        }
+        ShopHistory.saveHistory(Integer.parseInt(id.substring(0,id.length()-1)),arr);//сохраняем чек
+    }
+
 }

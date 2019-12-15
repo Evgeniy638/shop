@@ -9,11 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< Updated upstream
         <activity android:name=".Authorization">
-=======
+
         <activity android:id=".ListOnlyClientsActivity">
->>>>>>> Stashed changes
             <intent-filter>
                 <action android:id="android.intent.action.MAIN" />
 
