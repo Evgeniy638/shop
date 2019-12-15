@@ -15,8 +15,8 @@ public  class Shop {
         arrayShop[7]="Сидр:450:100";
         arrayShop[8]="Джин:500:100";
         arrayShop[9]="Тоник:750:100";
-        arrayShop[10]="Текила950:100";
-        arrayShop[11]="Самбука600:100";
+        arrayShop[10]="Текила:950:100";
+        arrayShop[11]="Самбука:600:100";
         arrayShop[12]="Ликёр:1500:100";
         arrayShop[13]="Портвейн:700:100";
         arrayShop[14]="Мадера:950:100";

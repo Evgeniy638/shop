@@ -24,14 +24,14 @@ public class Validator {
             //получаем количество взятого в магазине товара
             a[1]=String.valueOf(Shop.setQuanityTake( Integer.parseInt(a[0]),Integer.parseInt(a[1])));
             //сохраняем в историю
-            arryOfShoper[currentParsher] = id +a[0]+a[1];
+            arryOfShoper[currentParsher] = id +a[0]+":"+a[1];
 
             shoperList[Integer.parseInt(a[0])] +=Integer.parseInt(a[1]);
 
             //Общая стоимость повышается
             totalAmount+=Shop.getPrice(Integer.parseInt(a[0]))*Integer.parseInt(a[1]);
             currentParsher++;
-            return id +a[0]+a[1];
+            return id +a[0]+":"+a[1];
         }
         else return null;//товар закончился
     }
@@ -69,9 +69,16 @@ public class Validator {
         array[0]=n;//0-левой элемент массива-это колличество элементов
         n=0;
         for(int i=0;i<100;i++){
+<<<<<<< refs/remotes/origin/develop
             if(shoperList[i]!=0)
                 array[n+1]=shoperList[i];
             n++;
+=======
+            if(shoperList[i]!=0) {
+                array[n+1]=i;
+                n++;
+            }
+>>>>>>> Logic94%
         }
         return array;
     }//возвращает массив id товаров,0левой элемент-колличество товаров
