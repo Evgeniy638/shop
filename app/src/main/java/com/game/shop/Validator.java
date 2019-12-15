@@ -6,6 +6,7 @@ public class Validator {
         for(int i=0;i<100;i++)arryOfShoper[i]="";
         for(int i=0;i<100;i++)shoperList[i]=0;
         answer[0]=this.id;
+        for(int i=1;i<100;i++) answer[i]="";
     }
     //список товаров
     /*
@@ -101,7 +102,7 @@ public class Validator {
     }
 
     public String[] makeAnswer(String idProd,String amountProd){
-        if(answer[Integer.parseInt(idProd)+1].length()>2){
+        if(answer[Integer.parseInt(idProd)+1]!=""){
             String[] a = answer[Integer.parseInt(idProd)+1].split(":");
             a[1]=String.valueOf(Integer.parseInt(a[1]) + amountProd);
             answer[Integer.parseInt(idProd)+1] = Shop.getName(Integer.parseInt(idProd))+":"+a[1]+":"+Shop.getPrice(Integer.parseInt(idProd));
