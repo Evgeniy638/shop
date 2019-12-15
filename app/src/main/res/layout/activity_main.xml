@@ -43,13 +43,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:id="@+id/list_products">
 
 
                 <TextView
                     android:id="@+id/prod"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     style="@style/ForGoods"
                     android:text="Продукт" />
                 <TextView
@@ -113,7 +112,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/back_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="65dp"
                     android:layout_weight="1"

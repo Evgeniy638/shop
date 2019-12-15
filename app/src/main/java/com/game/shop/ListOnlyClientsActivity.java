@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,20 +31,18 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
 
         viewListOnlyClients = findViewById(R.id.list_only_clients);
 
+        (findViewById(R.id.list_history)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ListOnlyClientsActivity.this, ListPurchaseHistory.class);
+                startActivity(i);
+            }
+        });
+
         for (int i = 0; i < countClients; i++){
             textViews[i] = addViewClients(viewListOnlyClients.getContext());
 
             final int finalI = i;
-
-            textViews[finalI].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(ListOnlyClientsActivity.this, MoreAboutClientActivity.class);
-                    //String data = (String) msg.obj;//данные о пользователе
-                    //i.putExtra("data", data);
-                    startActivity(i);
-                }
-            });
 
             handler[i] = new Handler(){
                 @Override
@@ -52,9 +51,19 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
 
                     if(msg.what == 0){
                         viewListOnlyClients.removeView(textViews[finalI]);
+                    }else {
+                        MoreAboutClientActivity.sendMessage((String[]) msg.obj);
                     }
                 }
             };
+
+            textViews[finalI].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ListOnlyClientsActivity.this, MoreAboutClientActivity.class);
+                    startActivity(intent);
+                }
+            });
 
             clients[i] = new Client(Integer.toString(i), handler[i]);
             clients[i].start(/* handler[i] */);

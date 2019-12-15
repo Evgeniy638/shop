@@ -64,7 +64,7 @@
             android:layout_marginTop="19dp"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/list_history"
                 android:layout_width="155dp"
                 android:layout_height="65dp"
                 android:layout_weight="1"
@@ -76,7 +76,7 @@
                 android:textStyle="italic"
                 android:background="@drawable/button_viruchka"
                 android:textColor="#DA3232"
-                android:text="Выручка" />
+                android:text="История покупок" />
 
 
 
