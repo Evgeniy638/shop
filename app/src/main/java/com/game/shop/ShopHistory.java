@@ -1,8 +1,17 @@
 package com.game.shop;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ShopHistory {
+
+    ShopHistory(){
+
+    }
+
     static String[][] arrahHistory = new String[15][15];
     static boolean[] array=new boolean[15];
+
 
     public void saveHistory(int id,String [] arrayFromValid){
         arrahHistory[id]=arrayFromValid;

@@ -20,13 +20,8 @@ public  class Shop {
         arrayShop[12]="Ликёр:1500:100";
         arrayShop[13]="Портвейн:700:100";
         arrayShop[14]="Мадера:950:100";
-        arrayShop[15]="Вода:100:100";
     }
 
-    public static int getQoanity(int id){ //получить количество товара
-        String[] a = arrayShop[id].split(":");
-        return Integer.parseInt(a[2]);
-    }
 
     public static int setQuanityTake (int id,int quanity){//Взять товар
         String[] a = arrayShop[id].split(":");
@@ -37,10 +32,11 @@ public  class Shop {
             return quanity; //возвращает колличество взятого товара
         }
         else {
+            //Товара меньше,чем хотел человек.Поэтому он забирает всё
             quanity = Integer.parseInt(a[2]);
             a[2] = String.valueOf(Integer.parseInt(a[2]) + quanity);
             arrayShop[id] = a[0]+":"+a[1]+":"+a[2];
-            return quanity;//Товара меньше,чем хотел человек.Поэтому он забирает всё
+            return quanity;
         }
     }
 
@@ -52,6 +48,7 @@ public  class Shop {
     }
 
 
+
     public static String getName(int id){ //получить название товара
         String[] a = arrayShop[id].split(":");
         return a[0];
@@ -61,5 +58,8 @@ public  class Shop {
         String[] a = arrayShop[id].split(":");
         return Integer.parseInt(a[1]);
     }
-
+    public static int getQoanity(int id){ //получить количество товара
+        String[] a = arrayShop[id].split(":");
+        return Integer.parseInt(a[2]);
+    }
 }
