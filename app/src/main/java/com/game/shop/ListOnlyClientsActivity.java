@@ -34,21 +34,24 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
             textViews[i] = addViewClients(viewListOnlyClients.getContext());
 
             final int finalI = i;
+
+            textViews[finalI].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(ListOnlyClientsActivity.this, MoreAboutClientActivity.class);
+                    //String data = (String) msg.obj;//данные о пользователе
+                    //i.putExtra("data", data);
+                    startActivity(i);
+                }
+            });
+
             handler[i] = new Handler(){
                 @Override
-                public void handleMessage(@NonNull final Message msg) {
+                public void handleMessage(@NonNull Message msg) {
                     super.handleMessage(msg);
 
                     if(msg.what == 1){
-                        textViews[finalI].setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent i = new Intent(ListOnlyClientsActivity.this, MoreAboutClientActivity.class);
-                                String data = (String) msg.obj;//данные о пользователе
-                                i.putExtra("data", data);
-                                startActivity(i);
-                            }
-                        });
+
                     }else {
                         removeViewClients(textViews[finalI]);
                     }
