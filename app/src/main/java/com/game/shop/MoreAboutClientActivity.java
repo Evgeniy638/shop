@@ -89,7 +89,7 @@ public class MoreAboutClientActivity extends Activity {
                 finish();
             }
         });
-        
+
         isDraw = true;
         sendMessage();
     }

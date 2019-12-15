@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 public class ListOnlyClientsActivity extends AppCompatActivity {
     static int countClients = 5;
+    private int currentCountClients = countClients;
     Client[] clients = new Client[countClients];
     Handler[] handler = new Handler[countClients];
     TextView[] textViews = new TextView[countClients];
@@ -57,6 +58,7 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
                     super.handleMessage(msg);
 
                     if(msg.what == 0){
+                        currentCountClients--;
                         viewListOnlyClients.removeView(textViews[finalI]);
                     }else{
                         int id = Integer.parseInt(((String [])msg.obj)[0].split(":")[0]);
@@ -66,6 +68,15 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
                         if(id == currentIdUser){
                             MoreAboutClientActivity.sendMessage();
                         }
+                    }
+
+                    if(currentCountClients == 0){
+                        Context context = new ContextThemeWrapper(viewListOnlyClients.getContext(), R.style.center);
+                        TextView textView = new TextView(context);
+
+                        textView.setText("Никого нет онлайн");
+
+                        viewListOnlyClients.addView(textView);
                     }
                 }
             };
