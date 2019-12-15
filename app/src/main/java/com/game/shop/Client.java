@@ -15,8 +15,6 @@ public class Client extends Thread {
         this.id=id;
         this.handler=handler;
         validator = new Validator(id);
-        msg=new Message();
-        msg.what=1;
     }
 
     @Override
@@ -26,6 +24,8 @@ public class Client extends Thread {
         int countGoods = (int)(Math.random() * 20);
 
         for (int i = 0; i < countGoods; i++){
+            msg=new Message();
+            msg.what=1;
 
             try {
                 sleep((long)(Math.random() * 10000));
