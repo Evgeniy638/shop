@@ -61,6 +61,7 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ListOnlyClientsActivity.this, MoreAboutClientActivity.class);
+                    intent.putExtra("id", Integer.toString(finalI));
                     startActivity(intent);
                 }
             });
