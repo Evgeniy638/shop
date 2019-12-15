@@ -35,8 +35,7 @@ public class Validator {
         }
         else return null;//товар закончился
     }
-
-    //параметр будет товар
+    
     public String returnGoods(String product){
         String[] a = product.split(":");
         if(shoperList[Integer.parseInt(a[0])]!=0) {//если в корзине есть такой товар
@@ -61,7 +60,7 @@ public class Validator {
         else return null;//корзина пуста
     }
 
-    public int[] getIdList(){//возвращает массив id товаров,0левой элемент-колличество товаров
+    public int[] getIdList(){
         int n=0;
         for(int i=0;i<100;i++){
             if(shoperList[i]!=0) n++;
@@ -74,7 +73,7 @@ public class Validator {
             n++;
         }
         return array;
-    }
+    }//возвращает массив id товаров,0левой элемент-колличество товаров
     public int getQuanity(int id){
         return shoperList[id];
     }//колличество определённого товара

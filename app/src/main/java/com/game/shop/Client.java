@@ -57,6 +57,7 @@ public class Client extends Thread {
             }
 
         }
+        //Когда клиент закончил
         validator.saveHistory();
         msg.what=0;
         handler.sendMessage(msg);
