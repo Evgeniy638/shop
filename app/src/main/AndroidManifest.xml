@@ -17,11 +17,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ListOnlyClientsActivity"></activity>
+        <activity android:name=".ListOnlineClientsActivity"></activity>
 
-        <activity android:name=".MoreAboutClientActivity"></activity>
+        <activity android:name=".MoreAboutOnlineClientActivity"></activity>
 
         <activity android:name=".ListPurchaseHistory"></activity>
+
+        <activity android:name=".MoreAboutHistoryClientActivity"></activity>
     </application>
 
 </manifest>

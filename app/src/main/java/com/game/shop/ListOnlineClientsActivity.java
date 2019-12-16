@@ -11,11 +11,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ListOnlyClientsActivity extends AppCompatActivity {
+public class ListOnlineClientsActivity extends AppCompatActivity {
+    ListPurchaseHistory listPurchaseHistory = new ListPurchaseHistory();
     static int countClients = 5;
     private int currentCountClients = countClients;
     Client[] clients = new Client[countClients];
@@ -40,7 +40,7 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
         (findViewById(R.id.list_history)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ListOnlyClientsActivity.this, ListPurchaseHistory.class);
+                Intent i = new Intent(ListOnlineClientsActivity.this, ListPurchaseHistory.class);
                 startActivity(i);
             }
         });
@@ -60,13 +60,14 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
                     if(msg.what == 0){
                         currentCountClients--;
                         viewListOnlyClients.removeView(textViews[finalI]);
+                        listPurchaseHistory.sendMessage(finalI);
                     }else{
                         int id = Integer.parseInt(((String [])msg.obj)[0].split(":")[0]);
                         totalAmounts[id] = msg.arg1;
                         messages[id] = (String [])msg.obj;
 
                         if(id == currentIdUser){
-                            MoreAboutClientActivity.sendMessage();
+                            MoreAboutOnlineClientActivity.sendMessage();
                         }
                     }
 
@@ -84,7 +85,7 @@ public class ListOnlyClientsActivity extends AppCompatActivity {
             textViews[finalI].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ListOnlyClientsActivity.this, MoreAboutClientActivity.class);
+                    Intent intent = new Intent(ListOnlineClientsActivity.this, MoreAboutOnlineClientActivity.class);
                     currentIdUser = finalI;
                     intent.putExtra("id", Integer.toString(finalI));
                     startActivity(intent);

@@ -28,7 +28,7 @@ public class Authorization extends Activity {
                 String pass = passView.getText().toString();
 
                 if((log.equals(login) && pass.equals(password)) || true){
-                    Intent i = new Intent(Authorization.this, ListOnlyClientsActivity.class);
+                    Intent i = new Intent(Authorization.this, ListOnlineClientsActivity.class);
                     startActivity(i);
                 }else {
                     logView.setText("");

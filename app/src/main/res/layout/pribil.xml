@@ -34,26 +34,16 @@
                 android:textColor="#F51D1D"
                 android:textStyle="italic"
                 android:background="@drawable/goods"
-                android:text="Прибыль" />
+                android:text="История покупок" />
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/list_history"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/prib1"
-                    style="@style/ForOnline"
-                    android:text="1. 1517₽" />
-                <TextView
-                    android:id="@+id/prib2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/NotOnline"
-                    android:text="2. 508₽" />
             </LinearLayout>
         </ScrollView>
         </LinearLayout>
@@ -77,7 +67,7 @@
                 android:textStyle="italic"
                 android:background="@drawable/button_online"
                 android:textColor="#CFCC1C"
-                android:text="Онлайн" />
+                android:text="Список онлайн" />
 
 
 

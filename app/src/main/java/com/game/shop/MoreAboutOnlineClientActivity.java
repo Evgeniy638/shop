@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-public class MoreAboutClientActivity extends Activity {
+public class MoreAboutOnlineClientActivity extends Activity {
     private static String[] data;
     private static int totalAmount = 0;
 
@@ -33,26 +33,26 @@ public class MoreAboutClientActivity extends Activity {
         listProducts = findViewById(R.id.list_products);
         totalSumView = findViewById(R.id.sum);
 
-        if(ListOnlyClientsActivity.currentIdUser == 0){
+        if(ListOnlineClientsActivity.currentIdUser == 0){
             findViewById(R.id.left_arrow).setVisibility(View.INVISIBLE);
         }
 
-        if(ListOnlyClientsActivity.currentIdUser == ListOnlyClientsActivity.countClients - 1){
+        if(ListOnlineClientsActivity.currentIdUser == ListOnlineClientsActivity.countClients - 1){
             findViewById(R.id.right_arrow).setVisibility(View.INVISIBLE);
         }
 
         findViewById(R.id.left_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ListOnlyClientsActivity.currentIdUser - 1 >= 0){
+                if (ListOnlineClientsActivity.currentIdUser - 1 >= 0){
                     listProducts.removeAllViews();
-                    ListOnlyClientsActivity.currentIdUser--;
-                    id = Integer.toString(ListOnlyClientsActivity.currentIdUser);
+                    ListOnlineClientsActivity.currentIdUser--;
+                    id = Integer.toString(ListOnlineClientsActivity.currentIdUser);
                     ((TextView)findViewById(R.id.clients)).setText("Клиент: " + id);
                     sendMessage();
                 }
 
-                if(ListOnlyClientsActivity.currentIdUser == 0){
+                if(ListOnlineClientsActivity.currentIdUser == 0){
                     findViewById(R.id.left_arrow).setVisibility(View.INVISIBLE);
                 }else {
                     findViewById(R.id.right_arrow).setVisibility(View.VISIBLE);
@@ -64,15 +64,15 @@ public class MoreAboutClientActivity extends Activity {
         findViewById(R.id.right_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ListOnlyClientsActivity.currentIdUser + 1 <= ListOnlyClientsActivity.countClients - 1){
+                if (ListOnlineClientsActivity.currentIdUser + 1 <= ListOnlineClientsActivity.countClients - 1){
                     listProducts.removeAllViews();
-                    ListOnlyClientsActivity.currentIdUser++;
-                    id = Integer.toString(ListOnlyClientsActivity.currentIdUser);
+                    ListOnlineClientsActivity.currentIdUser++;
+                    id = Integer.toString(ListOnlineClientsActivity.currentIdUser);
                     ((TextView)findViewById(R.id.clients)).setText("Клиент: " + id);
                     sendMessage();
                 }
 
-                if(ListOnlyClientsActivity.currentIdUser == ListOnlyClientsActivity.countClients - 1){
+                if(ListOnlineClientsActivity.currentIdUser == ListOnlineClientsActivity.countClients - 1){
                     findViewById(R.id.right_arrow).setVisibility(View.INVISIBLE);
                 }else {
                     findViewById(R.id.right_arrow).setVisibility(View.VISIBLE);
@@ -85,7 +85,7 @@ public class MoreAboutClientActivity extends Activity {
             @Override
             public void onClick(View v) {
                 isDraw = false;
-                ListOnlyClientsActivity.currentIdUser = -1;
+                ListOnlineClientsActivity.currentIdUser = -1;
                 finish();
             }
         });
@@ -95,8 +95,8 @@ public class MoreAboutClientActivity extends Activity {
     }
 
     public static void sendMessage(){
-        data = ListOnlyClientsActivity.messages[ListOnlyClientsActivity.currentIdUser];
-        MoreAboutClientActivity.totalAmount = ListOnlyClientsActivity.totalAmounts[ListOnlyClientsActivity.currentIdUser];
+        data = ListOnlineClientsActivity.messages[ListOnlineClientsActivity.currentIdUser];
+        MoreAboutOnlineClientActivity.totalAmount = ListOnlineClientsActivity.totalAmounts[ListOnlineClientsActivity.currentIdUser];
 
         if(isDraw) drawList();
     }
