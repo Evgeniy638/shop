@@ -27,6 +27,7 @@ public class Validator {
         if(Shop.getQoanity(Integer.parseInt(a[0]))!=0){
             //получаем количество взятого в магазине товара
             a[1]=String.valueOf(Shop.setQuanityTake( Integer.parseInt(a[0]),Integer.parseInt(a[1])));
+            if(a[1].equals("-1")) return answer;
             //сохраняем в историю
             arryOfShoper[currentParsher] = id +a[0]+":"+a[1];
 
@@ -37,7 +38,7 @@ public class Validator {
             currentParsher++;
             return makeAnswer(a[0],a[1]);
         }
-        else return null;//товар закончился
+        else return answer;//товар закончился
     }
     
     public String[] returnGoods(String product){
@@ -48,6 +49,8 @@ public class Validator {
                 Shop.setQuanityPut(Integer.parseInt(a[0]), Integer.parseInt(a[1]));
                 arryOfShoper[currentParsher] = id + a[0] + ":-" + a[1];//минус указывает,что был возврат
                 //Общая стоимость снижается
+                shoperList[Integer.parseInt(a[0])] = shoperList[Integer.parseInt(a[0])]-Integer.parseInt(a[1]);
+
                 totalAmount -= Shop.getPrice(Integer.parseInt(a[0])) * Integer.parseInt(a[1]);
                 currentParsher++;
             }
@@ -59,9 +62,9 @@ public class Validator {
                 totalAmount -= Shop.getPrice(Integer.parseInt(a[0])) * Integer.parseInt(a[1]);
                 currentParsher++;
             }
-            return makeAnswer(a[0],":-"+a[1]) ;
+            return makeAnswer(a[0],"-"+a[1]) ;
         }
-        else return null;//корзина пуста
+        else return answer;//корзина пуста
     }
 
     public int[] getIdList(){
@@ -104,9 +107,10 @@ public class Validator {
     public String[] makeAnswer(String idProd,String amountProd){
         if(answer[Integer.parseInt(idProd)+1]!=""){
             String[] a = answer[Integer.parseInt(idProd)+1].split(":");
-            a[1]=String.valueOf(Integer.parseInt(a[1]) + amountProd);
+            a[1]=String.valueOf(Integer.parseInt(a[1]) + Integer.parseInt(amountProd));
             answer[Integer.parseInt(idProd)+1] = Shop.getName(Integer.parseInt(idProd))+":"+a[1]+":"+Shop.getPrice(Integer.parseInt(idProd));
         }
+        else if (Integer.parseInt(amountProd)<=0)answer[Integer.parseInt(idProd)+1] = "";
         else answer[Integer.parseInt(idProd)+1] = Shop.getName(Integer.parseInt(idProd))+":"+amountProd+":"+Shop.getPrice(Integer.parseInt(idProd));
         return answer;
     }
