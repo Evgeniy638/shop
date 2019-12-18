@@ -116,10 +116,14 @@ public class MoreAboutHistoryClientActivity extends Activity {
         for (int i = 1; i < data.length; i++){
             if (data[i] == null || data[i].equals("")) continue;
 
+            String[] strings = data[i].split(":");
+
             Context context = new ContextThemeWrapper(listProducts.getContext(), R.style.ForGoods);
             TextView textView = new TextView(context);
 
-            textView.setText(data[i]);
+            textView.setText(strings[0] + " " + strings[1] + "*" + strings[2]);
+            textView.setText(textView.getText() + "\t\t\t" +
+                    Integer.parseInt(strings[1]) * Integer.parseInt(strings[2]));
 
             listProducts.addView(textView);
         }

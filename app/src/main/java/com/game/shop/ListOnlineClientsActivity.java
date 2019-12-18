@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ListOnlineClientsActivity extends AppCompatActivity {
-    ListPurchaseHistory listPurchaseHistory = new ListPurchaseHistory();
     static int countClients = 5;
     private int currentCountClients = countClients;
     Client[] clients = new Client[countClients];
@@ -60,7 +59,7 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
                     if(msg.what == 0){
                         currentCountClients--;
                         viewListOnlyClients.removeView(textViews[finalI]);
-                        listPurchaseHistory.sendMessage(finalI);
+                        ListPurchaseHistory.sendMessage(finalI);
                     }else{
                         int id = Integer.parseInt(((String [])msg.obj)[0].split(":")[0]);
                         totalAmounts[id] = msg.arg1;
@@ -93,7 +92,7 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
             });
 
             clients[i] = new Client(Integer.toString(i), handler[i]);
-            clients[i].start(/* handler[i] */);
+            clients[i].start();
         }
     }
 

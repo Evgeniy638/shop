@@ -16,6 +16,8 @@ import static com.game.shop.ListOnlineClientsActivity.countClients;
 public class ListPurchaseHistory extends Activity {
     static LinearLayout viewListHistory;
 
+    static Context listHistoryContext;
+
     static String[][] messages = new String[countClients][15];
     static int[] totalAmounts = new int[countClients];
     static int currentId = -1;
@@ -26,6 +28,8 @@ public class ListPurchaseHistory extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pribil);
+
+        listHistoryContext = this;
 
         viewListHistory = findViewById(R.id.list_history);
 
@@ -38,6 +42,20 @@ public class ListPurchaseHistory extends Activity {
             }
         });
 
+        isDraw = true;
+        drawList();
+    }
+
+    public static void sendMessage(int finalI){
+        ListPurchaseHistory.messages[finalI] = ListOnlineClientsActivity.messages[finalI];
+        ListPurchaseHistory.totalAmounts[finalI] = ListOnlineClientsActivity.totalAmounts[finalI];
+
+        if(isDraw) drawList();
+    }
+
+    private static void drawList(){
+        viewListHistory.removeAllViews();
+
         for (int i = 0; i < messages.length; i++){
             if(isAllNull(messages[i])) continue;
 
@@ -49,31 +67,15 @@ public class ListPurchaseHistory extends Activity {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ListPurchaseHistory.this, MoreAboutHistoryClientActivity.class);
+                    Intent intent = new Intent(listHistoryContext, MoreAboutHistoryClientActivity.class);
                     currentId = finalI;
-                    startActivity(intent);
+                    listHistoryContext.startActivity(intent);
                 }
             });
         }
-
-        isDraw = true;
-        //drawList();
     }
 
-    public void sendMessage(int finalI){
-        ListPurchaseHistory.messages[finalI] = ListOnlineClientsActivity.messages[finalI];
-        ListPurchaseHistory.totalAmounts[finalI] = ListPurchaseHistory.totalAmounts[finalI];
-
-        //if(isDraw) drawList();
-    }
-
-    private void drawList(){
-        viewListHistory.removeAllViews();
-
-
-    }
-
-    private TextView addViewClients(Context parentContext){
+    private static TextView addViewClients(Context parentContext){
         Context newContext = new ContextThemeWrapper(parentContext, R.style.ForOnline);
         TextView textView = new TextView(newContext);
 
