@@ -33,7 +33,7 @@ public class Validator {
             }
             else {//Если а магазине товара меньше, чем мы хотим или равно
                 shoperList[Integer.parseInt(a[0])] +=Shop.getQoanity(Integer.parseInt(a[0]));//записываем в список
-                totalAmount -= Shop.getPrice(Integer.parseInt(a[0])) * Shop.getQoanity(Integer.parseInt(a[0]));
+                totalAmount += Shop.getPrice(Integer.parseInt(a[0])) * Shop.getQoanity(Integer.parseInt(a[0]));
                 Shop.setQuanityTake(Integer.parseInt(a[0]),Shop.getQoanity(Integer.parseInt(a[0])));//забираем из магазина всё,что осталось
                 makeAnswer(a[0],String.valueOf(shoperList[Integer.parseInt(a[0])]));
             }

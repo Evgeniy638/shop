@@ -93,7 +93,12 @@ public class ListPurchaseHistory extends Activity {
         Context newContext = new ContextThemeWrapper(parentContext, R.style.ForOnline);
         TextView textView = new TextView(newContext);
 
-        viewListHistory.addView(textView);
+        //Добавлено начало
+        LinearLayout.LayoutParams layoytParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoytParams.setMargins(20,10,20,10);
+        //Добавлено конец
+
+        viewListHistory.addView(textView,layoytParams);//Добавил layoutParams
 
         return textView;
     }

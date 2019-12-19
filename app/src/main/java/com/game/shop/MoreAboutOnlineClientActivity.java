@@ -8,6 +8,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 
@@ -109,6 +110,10 @@ public class MoreAboutOnlineClientActivity extends Activity {
 
         listProducts.removeAllViews();
 
+        //Добавлено начало
+        LinearLayout.LayoutParams layoytParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoytParams.setMargins(20,10,20,10);
+        //Добавлено конец
         for (int i = 1; i < data.length; i++){
             if (data[i] == null || data[i].equals("")) continue;
 
@@ -117,11 +122,13 @@ public class MoreAboutOnlineClientActivity extends Activity {
             Context context = new ContextThemeWrapper(listProducts.getContext(), R.style.ForGoods);
             TextView textView = new TextView(context);
 
-            textView.setText(strings[0] + " " + strings[1] + "*" + strings[2] + "руб.");
-            textView.setText(textView.getText() + "\t= " +
-                    Integer.parseInt(strings[1]) * Integer.parseInt(strings[2]) + "руб.");
+            textView.setText(strings[0] + ":" + strings[1]+":"+ strings[2]);
+            /*Изменил:
+              textView.setText(strings[0] + " " + strings[1] + "*" + strings[2] + "руб.");
+                  textView.setText(textView.getText() + "\t= " +
+                  Integer.parseInt(strings[1]) * Integer.parseInt(strings[2]) + "руб.");*/
 
-            listProducts.addView(textView);
+            listProducts.addView(textView,layoytParams);//Добавлено layoutParams
         }
     }
 }

@@ -28,7 +28,7 @@ public class Client extends Thread {
             msg.what=1;
 
             try {
-                sleep((long)(Math.random() * 10000));//
+                sleep((long)(Math.random() * 10000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
