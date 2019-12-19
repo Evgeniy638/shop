@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
     static String[][] messages = new String[countClients][15];
     static int[] totalAmounts = new int[countClients];
 
+    static Button list_history;
+
     LinearLayout viewListOnlyClients;
 
     @SuppressLint("HandlerLeak")
@@ -36,11 +39,21 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
 
         viewListOnlyClients = findViewById(R.id.list_only_clients);
 
-        (findViewById(R.id.list_history)).setOnClickListener(new View.OnClickListener() {
+        list_history = findViewById(R.id.list_history);
+
+        list_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                list_history.setEnabled(false);
                 Intent i = new Intent(ListOnlineClientsActivity.this, ListPurchaseHistory.class);
                 startActivity(i);
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                list_history.setEnabled(true);
+                            }
+                        },
+                        400);
             }
         });
 

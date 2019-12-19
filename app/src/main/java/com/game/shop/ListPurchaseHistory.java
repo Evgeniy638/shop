@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,8 @@ public class ListPurchaseHistory extends Activity {
     static int[] totalAmounts = new int[countClients];
     static int currentId = -1;
 
+    private static Button onlineButton;
+
     private static boolean isDraw = false;
 
     @Override
@@ -29,11 +32,22 @@ public class ListPurchaseHistory extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pribil);
 
+        onlineButton = findViewById(R.id.online);
+
+        onlineButton.setEnabled(false);
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        onlineButton.setEnabled(true);
+                    }
+                },
+                400);
+
         listHistoryContext = this;
 
         viewListHistory = findViewById(R.id.list_history);
 
-        findViewById(R.id.online).setOnClickListener(new View.OnClickListener() {
+        onlineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currentId = -1;
