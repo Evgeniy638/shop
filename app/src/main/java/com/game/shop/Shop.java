@@ -23,27 +23,18 @@ public  class Shop {
     }
 
 
-    public static int setQuanityTake (int id,int quanity){//Взять товар
+    public static void setQuanityTake (int id,int quanity){//Взять товар
         String[] a = arrayShop[id].split(":");
-        if(Integer.parseInt(a[2]) < 0) return -1;//товар закончился
-        else if((Integer.parseInt(a[2]) - quanity)>=0 ) {
-            a[2] = String.valueOf(Integer.parseInt(a[2]) - quanity);
-            arrayShop[id] = a[0]+":"+a[1]+":"+a[2];
-            return quanity; //возвращает колличество взятого товара
-        }
-        else {
-            //Товара меньше,чем хотел человек.Поэтому он забирает всё
-            quanity = Integer.parseInt(a[2]);
-            arrayShop[id] = a[0]+":"+a[1]+":"+"0";
-            return quanity;
-        }
+        a[2] = String.valueOf(Integer.parseInt(a[2]) - quanity);
+        arrayShop[id] = a[0]+":"+a[1]+":"+a[2];
+
+
     }
 
-    public static  int setQuanityPut(int id,int quanity){ //вернуть товар
+    public static void setQuanityPut(int id,int quanity){ //вернуть товар
         String[] a = arrayShop[id].split(":");
             a[2] = String.valueOf(Integer.parseInt(a[2]) + quanity);
             arrayShop[id] = a[0]+":"+a[1]+":"+a[2];
-            return quanity; //возвращает колличество возвращённого товара
     }
 
     public static String getName(int id){ //получить название товара

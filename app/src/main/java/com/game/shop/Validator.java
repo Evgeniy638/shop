@@ -17,54 +17,37 @@ public class Validator {
     private String[] answer=new String[100];
     private int[] shoperList = new int[100];//колличество вариантов товара(с запасом) в списке покупок,номер элемента соответствует id товара
     private int totalAmount=0;
-    private int currentParsher=0;//номер текущей покупки
 
 
-    //параметр будет товар
+
     //product="id товара:колличество товара"
+    //Покупаем товар
     public String[] takeGoods(String product){
         String[] a = product.split(":");
         if(Shop.getQoanity(Integer.parseInt(a[0]))!=0){
-            //получаем количество взятого в магазине товара
-            a[1]=String.valueOf(Shop.setQuanityTake( Integer.parseInt(a[0]),Integer.parseInt(a[1])));
-            if(a[1].equals("-1")) return answer;
-            //сохраняем в историю
-            arryOfShoper[currentParsher] = id +a[0]+":"+a[1];
-
-            shoperList[Integer.parseInt(a[0])] +=Integer.parseInt(a[1]);
-
-            //Общая стоимость повышается
-            totalAmount+=Shop.getPrice(Integer.parseInt(a[0]))*Integer.parseInt(a[1]);
-            currentParsher++;
-            return makeAnswer(a[0],a[1]);
+            if(Shop.getQoanity(Integer.parseInt(a[0])) > Integer.parseInt(a[1])){//Если а магазине товара больше,чем мы хотим
+                shoperList[Integer.parseInt(a[0])] +=Integer.parseInt(a[1]);//записываем в список
+                totalAmount += Shop.getPrice(Integer.parseInt(a[0])) * Integer.parseInt(a[1]);
+                Shop.setQuanityTake(Integer.parseInt(a[0]),Integer.parseInt(a[1]));//забираем из магазина нужное колличество
+                makeAnswer(a[0],String.valueOf(shoperList[Integer.parseInt(a[0])]));
+            }
+            else {//Если а магазине товара меньше, чем мы хотим или равно
+                shoperList[Integer.parseInt(a[0])] +=Shop.getQoanity(Integer.parseInt(a[0]));//записываем в список
+                totalAmount -= Shop.getPrice(Integer.parseInt(a[0])) * Shop.getQoanity(Integer.parseInt(a[0]));
+                Shop.setQuanityTake(Integer.parseInt(a[0]),Shop.getQoanity(Integer.parseInt(a[0])));//забираем из магазина всё,что осталось
+                makeAnswer(a[0],String.valueOf(shoperList[Integer.parseInt(a[0])]));
+            }
         }
-        else return answer;//товар закончился
+        return answer;
     }
-    
+    //Возвращаем товар
     public String[] returnGoods(String product){
-        String[] a = product.split(":");
-        if(shoperList[Integer.parseInt(a[0])]!=0) {//если в корзине есть такой товар
-            if(shoperList[Integer.parseInt(a[0])]-Integer.parseInt(a[1])>=0) {//Если в коризине >=колличество,которое хотят вернуть
-                //Возвращаем товар
-                Shop.setQuanityPut(Integer.parseInt(a[0]), Integer.parseInt(a[1]));
-                arryOfShoper[currentParsher] = id + a[0] + ":-" + a[1];//минус указывает,что был возврат
+                 String[] a = product.split(":");
                 //Общая стоимость снижается
-                shoperList[Integer.parseInt(a[0])] = shoperList[Integer.parseInt(a[0])]-Integer.parseInt(a[1]);
-
+                shoperList[Integer.parseInt(a[0])] -=Integer.parseInt(a[1]);//записываем в shoperList
                 totalAmount -= Shop.getPrice(Integer.parseInt(a[0])) * Integer.parseInt(a[1]);
-                currentParsher++;
-            }
-            else {//возвращаем весь наш товар
-                Shop.setQuanityPut(Integer.parseInt(a[0]),shoperList[Integer.parseInt(a[0])] );
-                a[1]=String.valueOf(shoperList[Integer.parseInt(a[0])]);
-                shoperList[Integer.parseInt(a[0])]=0;
-                arryOfShoper[currentParsher] = id + a[0] + ":-" + a[1];//минус указывает,что был возврат
-                totalAmount -= Shop.getPrice(Integer.parseInt(a[0])) * Integer.parseInt(a[1]);
-                currentParsher++;
-            }
-            return makeAnswer(a[0],"-"+a[1]) ;
-        }
-        else return answer;//корзина пуста
+                Shop.setQuanityPut(Integer.parseInt(a[0]), Integer.parseInt(a[1]));
+                return makeAnswer(a[0],String.valueOf(shoperList[Integer.parseInt(a[0])]));
     }
 
     public int[] getIdList(){
@@ -87,9 +70,6 @@ public class Validator {
         return shoperList[id];
     }//колличество определённого товара
 
-    public String[] getList(){
-        return arryOfShoper;
-    }//история операция
     public int getTotalAmount(){
         return totalAmount;
     }//текущая сумма покупки
@@ -105,13 +85,11 @@ public class Validator {
     }
 
     public String[] makeAnswer(String idProd,String amountProd){
-        if(answer[Integer.parseInt(idProd)+1]!=""){
-            String[] a = answer[Integer.parseInt(idProd)+1].split(":");
-            a[1]=String.valueOf(Integer.parseInt(a[1]) + Integer.parseInt(amountProd));
-            answer[Integer.parseInt(idProd)+1] = Shop.getName(Integer.parseInt(idProd))+":"+a[1]+":"+Shop.getPrice(Integer.parseInt(idProd));
+        if(!amountProd.equals("0")){
+            //Хотим положить,но изначально пусто
+            answer[Integer.parseInt(idProd)+1] = Shop.getName(Integer.parseInt(idProd))+":"+amountProd+":"+Integer.parseInt(amountProd) * Shop.getPrice(Integer.parseInt(idProd)) + " \u20BD";
         }
-        else if (Integer.parseInt(amountProd)<=0)answer[Integer.parseInt(idProd)+1] = "";
-        else answer[Integer.parseInt(idProd)+1] = Shop.getName(Integer.parseInt(idProd))+":"+amountProd+":"+Shop.getPrice(Integer.parseInt(idProd));
+        else answer[Integer.parseInt(idProd)+1] = "";
         return answer;
     }
 }
