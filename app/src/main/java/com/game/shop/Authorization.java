@@ -2,9 +2,12 @@ package com.game.shop;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 
@@ -18,6 +21,18 @@ public class Authorization extends Activity {
 
         setContentView(R.layout.authorization);
 
+        VideoView videoPlayer = (VideoView) findViewById(R.id.videoView);
+        Uri myVideoUri= Uri.parse( "android.resource://" + getPackageName() + "/" + R.raw.ricardo);
+        videoPlayer.setVideoURI(myVideoUri);
+        videoPlayer.start( );
+
+        videoPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+            }
+        });
+
         findViewById(R.id.enter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,6 +41,7 @@ public class Authorization extends Activity {
 
                 String log = logView.getText().toString();
                 String pass = passView.getText().toString();
+
 
                 if((log.equals(login) && pass.equals(password)) || true){
                     Intent i = new Intent(Authorization.this, ListOnlineClientsActivity.class);
