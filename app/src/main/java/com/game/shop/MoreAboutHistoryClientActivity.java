@@ -37,7 +37,7 @@ public class MoreAboutHistoryClientActivity extends Activity {
             findViewById(R.id.left_arrow).setVisibility(View.INVISIBLE);
         }
 
-        if(ListPurchaseHistory.currentId == ListPurchaseHistory.currentId - 1){
+        if(ListPurchaseHistory.currentId == ListPurchaseHistory.messages.length - 1){
             findViewById(R.id.right_arrow).setVisibility(View.INVISIBLE);
         }
 
@@ -76,7 +76,7 @@ public class MoreAboutHistoryClientActivity extends Activity {
                     sendMessage();
                 }
 
-                if(ListPurchaseHistory.currentId == ListPurchaseHistory.currentId - 1){
+                if(ListPurchaseHistory.currentId == ListPurchaseHistory.messages.length - 1){
                     findViewById(R.id.right_arrow).setVisibility(View.INVISIBLE);
                 }else {
                     findViewById(R.id.right_arrow).setVisibility(View.VISIBLE);
@@ -121,9 +121,9 @@ public class MoreAboutHistoryClientActivity extends Activity {
             Context context = new ContextThemeWrapper(listProducts.getContext(), R.style.ForGoods);
             TextView textView = new TextView(context);
 
-            textView.setText(strings[0] + " " + strings[1] + "*" + strings[2]);
-            textView.setText(textView.getText() + "\t\t\t" +
-                    Integer.parseInt(strings[1]) * Integer.parseInt(strings[2]));
+            textView.setText(strings[0] + " " + strings[1] + "*" + strings[2] + "руб.");
+            textView.setText(textView.getText() + "\t= " +
+                    Integer.parseInt(strings[1]) * Integer.parseInt(strings[2]) + "руб.");
 
             listProducts.addView(textView);
         }

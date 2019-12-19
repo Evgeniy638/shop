@@ -117,9 +117,9 @@ public class MoreAboutOnlineClientActivity extends Activity {
             Context context = new ContextThemeWrapper(listProducts.getContext(), R.style.ForGoods);
             TextView textView = new TextView(context);
 
-            textView.setText(strings[0] + " " + strings[1] + "*" + strings[2]);
-            textView.setText(textView.getText() + "\t\t\t" +
-                    Integer.parseInt(strings[1]) * Integer.parseInt(strings[2]));
+            textView.setText(strings[0] + " " + strings[1] + "*" + strings[2] + "руб.");
+            textView.setText(textView.getText() + "\t= " +
+                    Integer.parseInt(strings[1]) * Integer.parseInt(strings[2]) + "руб.");
 
             listProducts.addView(textView);
         }
