@@ -29,7 +29,7 @@ public class MoreAboutOnlineClientActivity extends Activity {
 
         id = getIntent().getStringExtra("id");
 
-        ((TextView)findViewById(R.id.clients)).setText("Клиент: " + id);
+        ((TextView)findViewById(R.id.clients)).setText("Клиент: " + (Integer.parseInt(id) + 1));
 
         listProducts = findViewById(R.id.list_products);
         totalSumView = findViewById(R.id.sum);
@@ -49,7 +49,7 @@ public class MoreAboutOnlineClientActivity extends Activity {
                     listProducts.removeAllViews();
                     ListOnlineClientsActivity.currentIdUser--;
                     id = Integer.toString(ListOnlineClientsActivity.currentIdUser);
-                    ((TextView)findViewById(R.id.clients)).setText("Клиент: " + id);
+                    ((TextView)findViewById(R.id.clients)).setText("Клиент: " + (Integer.parseInt(id) + 1));
                     sendMessage();
                 }
 
@@ -69,7 +69,7 @@ public class MoreAboutOnlineClientActivity extends Activity {
                     listProducts.removeAllViews();
                     ListOnlineClientsActivity.currentIdUser++;
                     id = Integer.toString(ListOnlineClientsActivity.currentIdUser);
-                    ((TextView)findViewById(R.id.clients)).setText("Клиент: " + id);
+                    ((TextView)findViewById(R.id.clients)).setText("Клиент: " + (Integer.parseInt(id) + 1));
                     sendMessage();
                 }
 
@@ -122,7 +122,7 @@ public class MoreAboutOnlineClientActivity extends Activity {
             Context context = new ContextThemeWrapper(listProducts.getContext(), R.style.ForGoods);
             TextView textView = new TextView(context);
 
-            textView.setText(strings[0] + ":" + strings[1]+":"+ strings[2]);
+            textView.setText(strings[0] + "*" + strings[1]+" = "+ strings[2]);
             /*Изменил:
               textView.setText(strings[0] + " " + strings[1] + "*" + strings[2] + "руб.");
                   textView.setText(textView.getText() + "\t= " +
