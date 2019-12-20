@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -34,6 +35,9 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
     static Button list_history;
 
     LinearLayout viewListOnlyClients;
+
+    int i=0;//Добавил
+
 
     @SuppressLint("HandlerLeak")
     @Override
@@ -66,10 +70,11 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
             }
         });
 
-        for (int i = 0; i < countClients; i++){
+        for (i = 0; i < countClients; i++){
             textViews[i] = addViewClients(viewListOnlyClients.getContext());
 
-            textViews[i].setText("Клиент: " + (i + 1));
+            textViews[i].setText("Клиент: " + (i+1));
+
 
             final int finalI = i;
 
@@ -80,7 +85,10 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
 
                     if(msg.what == 0){
                         currentCountClients--;
-                        viewListOnlyClients.removeView(textViews[finalI]);
+                        //моё
+                        deleteViewText(finalI);
+                        //моё
+                        //твоё: viewListOnlyClients.removeView(textViews[finalI]);
                         ListPurchaseHistory.sendMessage(finalI);
                     }else{
                         int id = Integer.parseInt(((String [])msg.obj)[0].split(":")[0]);
@@ -90,15 +98,31 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
                         if(id == currentIdUser){
                             MoreAboutOnlineClientActivity.sendMessage();
                         }
+                        //моё начало
+                        int b = Integer.parseInt(((String [])msg.obj)[0].substring(0, ((String [])msg.obj)[0].length()-1));
+                        String a = "Клиент: " + (b+1)+" ";
+                        for(int j=1;j<15;j++){
+                            if( ((String[]) msg.obj)[j] !=""){
+                                String[] c =((String[]) msg.obj)[j].split(":");
+                                a=a.concat("\n"+ c[0]);
+                            }
+                        }
+                        textViews[b].setText("");
+                        textViews[b].setText(a);
+                        //моё конец
                     }
 
                     if(currentCountClients == 0){
                         Context context = new ContextThemeWrapper(viewListOnlyClients.getContext(), R.style.center);
                         TextView textView = new TextView(context);
-
+                        //моё
+                        LinearLayout.LayoutParams layoytParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        layoytParams.gravity=Gravity.CENTER;
+                        viewListOnlyClients.removeAllViews();
+                        //моё
                         textView.setText("Никого нет онлайн");
 
-                        viewListOnlyClients.addView(textView);
+                        viewListOnlyClients.addView(textView,layoytParams);
                     }
                 }
             };
@@ -121,8 +145,6 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
     }
 
 
-
-
     private TextView addViewClients(Context parentContext){
         Context newContext = new ContextThemeWrapper(parentContext, R.style.ForOnline);
         TextView textView = new TextView(newContext);
@@ -136,18 +158,30 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
 
         return textView;
     }
-
+//Моё
     public void addViewText(TextView text,LinearLayout.LayoutParams layoutParams){
         if (schhetInString == 1) {
+            layoutParams.gravity=Gravity.LEFT;
             linerNikLeft.addView(text,layoutParams);
             schhetInString++;
         }
         else {
+            layoutParams.gravity=Gravity.RIGHT;
             linerNikRight.addView(text,layoutParams);
             schhetInString--;
         }
     }
-
+    public void deleteViewText(int finalId){
+        if ( (finalId+1)%2 ==1) {
+            linerNikLeft.removeView(textViews[finalId]);
+            schhetInString++;
+        }
+        else {
+            linerNikRight.removeView(textViews[finalId]);
+            schhetInString--;
+        }
+    }
+//Моё
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     }
