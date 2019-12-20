@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 public class Authorization extends Activity {
     private String login = "DuHast";
     private String password = "IchWill";
+    VideoView videoPlayer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class Authorization extends Activity {
 
         setContentView(R.layout.authorization);
 
-        VideoView videoPlayer = (VideoView) findViewById(R.id.videoView);
+        videoPlayer =  findViewById(R.id.videoView);
         Uri myVideoUri= Uri.parse( "android.resource://" + getPackageName() + "/" + R.raw.ricardo);
         videoPlayer.setVideoURI(myVideoUri);
         videoPlayer.start( );
@@ -55,5 +56,10 @@ public class Authorization extends Activity {
                 }
             }
         });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        videoPlayer.start( );
     }
 }

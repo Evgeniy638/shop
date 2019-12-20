@@ -27,6 +27,10 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
     static String[][] messages = new String[countClients][15];
     static int[] totalAmounts = new int[countClients];
 
+    int schhetInString; //теккушее положение элемента в строке(1 или 2)
+    LinearLayout linerNikLeft;//Добавил
+    LinearLayout linerNikRight;//Добавил
+
     static Button list_history;
 
     LinearLayout viewListOnlyClients;
@@ -36,6 +40,11 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.online_list);
+
+        schhetInString=1;//Добавил
+        linerNikLeft=findViewById(R.id.list_only_clients_left);//Добавил
+        linerNikRight=findViewById(R.id.list_only_clients_right);//Добавил
+
 
         viewListOnlyClients = findViewById(R.id.list_only_clients);
 
@@ -107,20 +116,36 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
             clients[i] = new Client(Integer.toString(i), handler[i]);
             clients[i].start();
         }
+
+
     }
+
+
+
 
     private TextView addViewClients(Context parentContext){
         Context newContext = new ContextThemeWrapper(parentContext, R.style.ForOnline);
         TextView textView = new TextView(newContext);
 
         //Добавлено начало
-        LinearLayout.LayoutParams layoytParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoytParams= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoytParams.setMargins(20,10,20,10);
         //Добавлено конец
 
-        viewListOnlyClients.addView(textView,layoytParams);
+        addViewText(textView,layoytParams);//добавил layoutParams
 
         return textView;
+    }
+
+    public void addViewText(TextView text,LinearLayout.LayoutParams layoutParams){
+        if (schhetInString == 1) {
+            linerNikLeft.addView(text,layoutParams);
+            schhetInString++;
+        }
+        else {
+            linerNikRight.addView(text,layoutParams);
+            schhetInString--;
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
