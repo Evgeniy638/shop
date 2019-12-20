@@ -44,15 +44,15 @@ public class Authorization extends Activity {
                 String pass = passView.getText().toString();
 
 
-                if((log.equals(login) && pass.equals(password)) || true){
+                if(log.equals(login) && pass.equals(password)){
                     Intent i = new Intent(Authorization.this, ListOnlineClientsActivity.class);
                     startActivity(i);
                 }else {
                     logView.setText("");
                     passView.setText("");
 
-                    logView.setHint("Неправильный логин");
-                    passView.setHint("или пароль :)");
+                    logView.setHint("Неправильная кликуха");
+                    passView.setHint("или кодовое слово :)");
                 }
             }
         });

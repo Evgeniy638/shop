@@ -69,7 +69,7 @@ public class ListOnlineClientsActivity extends AppCompatActivity {
         for (int i = 0; i < countClients; i++){
             textViews[i] = addViewClients(viewListOnlyClients.getContext());
 
-            textViews[i].setText("Клиент: " + i);
+            textViews[i].setText("Клиент: " + (i + 1));
 
             final int finalI = i;
 

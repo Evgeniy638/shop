@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 import static com.game.shop.ListOnlineClientsActivity.countClients;
 
 public class ListPurchaseHistory extends Activity {
@@ -22,6 +24,8 @@ public class ListPurchaseHistory extends Activity {
     static String[][] messages = new String[countClients][15];
     static int[] totalAmounts = new int[countClients];
     static int currentId = -1;
+    static int currentIndexId = -1;
+    static ArrayList<Integer> arrId = new ArrayList<>(0);
 
     private static Button onlineButton;
 
@@ -61,8 +65,12 @@ public class ListPurchaseHistory extends Activity {
     }
 
     public static void sendMessage(int finalI){
+        if(isAllNull( ListOnlineClientsActivity.messages[finalI])) return;
+
         ListPurchaseHistory.messages[finalI] = ListOnlineClientsActivity.messages[finalI];
         ListPurchaseHistory.totalAmounts[finalI] = ListOnlineClientsActivity.totalAmounts[finalI];
+
+        arrId.add(finalI);
 
         if(isDraw) drawList();
     }
@@ -70,19 +78,20 @@ public class ListPurchaseHistory extends Activity {
     private static void drawList(){
         viewListHistory.removeAllViews();
 
-        for (int i = 0; i < messages.length; i++){
-            if(isAllNull(messages[i])) continue;
+        for (int i = 0; i < arrId.size(); i++){
+            if(isAllNull(messages[arrId.get(i)])) continue;
 
             TextView textView = addViewClients(viewListHistory.getContext());
 
-            textView.setText("Клиент: " + i);
+            textView.setText("Клиент: " + (arrId.get(i) + 1));
 
-            final int finalI = i;
+            final int finalI = arrId.get(i);
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(listHistoryContext, MoreAboutHistoryClientActivity.class);
                     currentId = finalI;
+                    currentIndexId = arrId.indexOf(finalI);
                     listHistoryContext.startActivity(intent);
                 }
             });

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import static com.game.shop.ListPurchaseHistory.arrId;
+
 public class MoreAboutHistoryClientActivity extends Activity {
     private static String[] data;
     private static int totalAmount = 0;
@@ -28,34 +30,36 @@ public class MoreAboutHistoryClientActivity extends Activity {
 
         id = ListPurchaseHistory.currentId;
 
-        ((TextView)findViewById(R.id.clients)).setText("Клиент: " + id);
+        ((TextView)findViewById(R.id.clients)).setText("Клиент: " + (id + 1));
 
         listProducts = findViewById(R.id.list_products);
         totalSumView = findViewById(R.id.sum);
 
-        if(ListPurchaseHistory.currentId == 0){
+        if(ListPurchaseHistory.currentIndexId == 0){
             findViewById(R.id.left_arrow).setVisibility(View.INVISIBLE);
         }
 
-        if(ListPurchaseHistory.currentId == ListPurchaseHistory.messages.length - 1){
+        if(ListPurchaseHistory.currentIndexId == arrId.size() - 1){
             findViewById(R.id.right_arrow).setVisibility(View.INVISIBLE);
         }
 
         findViewById(R.id.left_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newId = ListPurchaseHistory.currentId - 1;
-                if (newId >= 0 &&
-                        !ListPurchaseHistory.isAllNull(ListPurchaseHistory.messages[newId])){
+                int newIndexId = ListPurchaseHistory.currentIndexId - 1;
+                if (newIndexId >= 0 &&
+                        !ListPurchaseHistory.isAllNull(ListPurchaseHistory.messages[arrId.get(newIndexId)])){
                     listProducts.removeAllViews();
-                    ListPurchaseHistory.currentId--;
-                    id = ListPurchaseHistory.currentId;
-                    ((TextView)findViewById(R.id.clients)).setText("Клиент: " + id);
+                    ListPurchaseHistory.currentId = arrId.get(newIndexId);
+                    id = arrId.get(newIndexId);
+                    ((TextView)findViewById(R.id.clients)).setText("Клиент: " + (id + 1));
+                    ListPurchaseHistory.currentIndexId = newIndexId;
                     sendMessage();
                 }
 
-                if(ListPurchaseHistory.currentId == 0){
+                if(newIndexId == 0){
                     findViewById(R.id.left_arrow).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.right_arrow).setVisibility(View.VISIBLE);
                 }else {
                     findViewById(R.id.right_arrow).setVisibility(View.VISIBLE);
                     findViewById(R.id.left_arrow).setVisibility(View.VISIBLE);
@@ -66,18 +70,20 @@ public class MoreAboutHistoryClientActivity extends Activity {
         findViewById(R.id.right_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newId = ListPurchaseHistory.currentId + 1;
-                if (newId <= ListPurchaseHistory.messages.length - 1&&
-                        !ListPurchaseHistory.isAllNull(ListPurchaseHistory.messages[newId])){
+                int newIndexId = ListPurchaseHistory.currentIndexId + 1;
+                if (newIndexId <= arrId.size() - 1 &&
+                        !ListPurchaseHistory.isAllNull(ListPurchaseHistory.messages[arrId.get(newIndexId)])){
                     listProducts.removeAllViews();
-                    ListPurchaseHistory.currentId++;
+                    ListPurchaseHistory.currentId = arrId.get(newIndexId);
                     id = ListPurchaseHistory.currentId;
-                    ((TextView)findViewById(R.id.clients)).setText("Клиент: " + id);
+                    ((TextView)findViewById(R.id.clients)).setText("Клиент: " + (id + 1));
+                    ListPurchaseHistory.currentIndexId = newIndexId;
                     sendMessage();
                 }
 
-                if(ListPurchaseHistory.currentId == ListPurchaseHistory.messages.length - 1){
+                if(newIndexId == arrId.size() - 1){
                     findViewById(R.id.right_arrow).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.left_arrow).setVisibility(View.VISIBLE);
                 }else {
                     findViewById(R.id.right_arrow).setVisibility(View.VISIBLE);
                     findViewById(R.id.left_arrow).setVisibility(View.VISIBLE);
@@ -126,7 +132,7 @@ public class MoreAboutHistoryClientActivity extends Activity {
             Context context = new ContextThemeWrapper(listProducts.getContext(), R.style.ForGoods);
             TextView textView = new TextView(context);
 
-            textView.setText(strings[0] + ":" + strings[1]+":"+ strings[2]);
+            textView.setText(strings[0] + "*" + strings[1]+" = "+ strings[2]);
             /*Изменил:
               textView.setText(strings[0] + " " + strings[1] + "*" + strings[2] + "руб.");
                   textView.setText(textView.getText() + "\t= " +

@@ -66,7 +66,7 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/fields"
             android:ems="10"
-            android:hint="Password"
+            android:hint="Кодовое слово"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textColor="#D82525" />
