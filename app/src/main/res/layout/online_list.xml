@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/back"
+    tools:context=".ListOnlineClientsActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="620dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/list_of_goods"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/clients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="32dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="8dp"
+                android:textColor="#F51D1D"
+                android:textStyle="italic"
+                android:background="@drawable/list_of_goods"
+                android:text="Список онлайн" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:id="@+id/list_only_clients">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/list_only_clients_left"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:gravity="center"
+                    ></LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/list_only_clients_right"
+                    android:layout_weight="1"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    ></LinearLayout>
+            </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="19dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/list_history"
+                android:layout_width="155dp"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:textSize="34dp"
+                android:paddingBottom="2dp"
+                android:layout_marginLeft="31dp"
+                android:layout_marginRight="31dp"
+                android:textAllCaps="false"
+                android:textStyle="italic"
+                android:background="@drawable/button_viruchka"
+                android:textColor="#DA3232"
+                android:text="История покупок" />
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
